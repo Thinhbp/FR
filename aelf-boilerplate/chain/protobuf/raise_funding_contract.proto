@@ -1,0 +1,46 @@
+/* This files is part of the Hello World smart contract example that is included in Boilerplate.
+ * It is only the definition of the contract, implementation is located in the "contract" folder
+ * and tests are located in the "test" folder.
+ *
+ * You can use this as a basic template for new contracts.
+ * 
+ * When building Boilerplate or the contract project located in the "../contract/AElf.Contracts.RaiseFundingContract/" 
+ * protoc (the protobuf compiler) will be invoked and this file will produce a .c.cs file and .g.cs file, in the 
+ * "../contract/AElf.Contracts.RaiseFundingContract/Protobuf/Generated/" folder. 
+ */
+
+syntax = "proto3";
+
+import "aelf/options.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+// the name of the C# namespace in which the contract code will be,
+// generated code will also be in this namespace.
+option csharp_namespace = "AElf.Contracts.RaiseFundingContract";
+
+service RaiseFundingContract {
+    option (aelf.csharp_state) = "AElf.Contracts.RaiseFundingContract.RaiseFundingContractState";
+    
+    // Actions
+    rpc DepositMoney (Funding) returns (google.protobuf.Int64Value) {
+    }
+
+    
+    // Views
+    rpc CheckBalance (Identifier) returns(google.protobuf.Int64Value){
+        option (aelf.is_view) = true;
+    }
+
+
+
+    
+}
+message Funding {
+    int32 idComic = 1;
+    int64 value_funding= 2;
+}
+
+message Identifier {
+    int32 id = 1;
+}
